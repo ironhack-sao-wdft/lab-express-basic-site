@@ -1,12 +1,12 @@
 const express = require("express");
 
-const PORT = 4000;
+const userRoutes = require('./user-routes');
 
-// Importing all the pokemon for our data file
-const allPokemon = require("./data");
+const PORT = 4000;
 
 const app = express();
 
-// -- Define your route listeners here! --
+// Route config middleware
+app.use('/', userRoutes);
 
 app.listen(PORT, () => console.log(`Server up and running at port ${PORT}`));
