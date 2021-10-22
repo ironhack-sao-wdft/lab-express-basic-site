@@ -28,9 +28,10 @@ router.get('/search', (request,response) => {
 
         let isValid = true;
         for (key in filter) {
-            isValid = isValid && pokemon[key] === filter[key];
-        }
-
+            isValid = isValid && pokemon[key].includes(filter[key]) ||
+            pokemon[key].toString().includes(filter[key]);
+        };   
+        
         return isValid; 
     });
 
