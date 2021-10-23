@@ -44,7 +44,7 @@ app.post('/pokemon', (request, response) => {
     if (!id || !name || !types || !height || !weight || !sprite) {
       return response.status(400).json({ message: 'Favor preencher todos os dados do novo Pokemon' });
     }
-    
+
     const pokemonExists = allPokemon.some((pokemon) => pokemon.name === name);
     if (pokemonExists) {
       return response.status(400).json({ message: 'Pokemon já existente' })
@@ -59,9 +59,9 @@ app.post('/pokemon', (request, response) => {
         sprite: sprite,
     };
   
-    allPokemon.push(newPokemon); // estamos fazendo de conta que o usuário está sendo salvo no banco
+    allPokemon.push(newPokemon); s
   
     return response.status(201).json(newPokemon)
-}); // rota que vai criar um novo usuario!
+}); 
 
 app.listen(PORT, () => console.log(`Server up and running at port ${PORT}`));
