@@ -1,12 +1,13 @@
 const express = require("express");
+const app = express();
 
 const PORT = 4000;
 
-// Importing all the pokemon for our data file
-const allPokemon = require("./data");
+const pokeRoute = require('./routes/pokeRoute')
 
-const app = express();
+//Middleware
+app.use(express.json());
 
-// -- Define your route listeners here! --
+app.use('/pokemon', pokeRoute);
 
 app.listen(PORT, () => console.log(`Server up and running at port ${PORT}`));
