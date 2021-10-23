@@ -6,7 +6,8 @@ const PORT = 5000;
 const allPokemon = require("./data");
 
 const app = express();
-  
+app.use(express.json());
+
 app.get('/pokemon', (request, response) => {
     return response.json(allPokemon);
 });
@@ -37,5 +38,30 @@ app.get('/search', (request, response) => {
     }
 });
 
+
+app.post('/pokemon', (request, response) => {
+    const { id, name, types, height, weight, sprite} = request.body;
+    if (!id || !name || !types || !height || !weight || !sprite) {
+      return response.status(400).json({ message: 'Favor preencher todos os dados do novo Pokemon' });
+    }
+    
+    const pokemonExists = allPokemon.some((pokemon) => pokemon.name === name);
+    if (pokemonExists) {
+      return response.status(400).json({ message: 'Pokemon já existente' })
+    }
+  
+    const newPokemon = {
+        id: new Date().getTime(),
+        name: name,
+        types: types,
+        height: height,
+        weight: weight,
+        sprite: sprite,
+    };
+  
+    allPokemon.push(newPokemon); // estamos fazendo de conta que o usuário está sendo salvo no banco
+  
+    return response.status(201).json(newPokemon)
+}); // rota que vai criar um novo usuario!
 
 app.listen(PORT, () => console.log(`Server up and running at port ${PORT}`));
