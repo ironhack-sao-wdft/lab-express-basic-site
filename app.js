@@ -6,6 +6,7 @@ const PORT = 8000;
 
 const app = express();
 
+app.use(express.json());
 app.use("/", pokeRoute);
 
 // -- Define your route listeners here! --
