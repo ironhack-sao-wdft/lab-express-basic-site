@@ -5,7 +5,9 @@ const PORT = 4000;
 
 const pokeRoute = require('./routes/pokeRoute')
 
-// Router config middleware
-app.use('/', pokeRoute);
+//Middleware
+app.use(express.json());
+
+app.use('/pokemon', pokeRoute);
 
 app.listen(PORT, () => console.log(`Server up and running at port ${PORT}`));
