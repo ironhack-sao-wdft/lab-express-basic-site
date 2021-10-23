@@ -1,11 +1,13 @@
 const express = require("express");
 
-const PORT = 4000;
+const pokeRoute = require("./routes/poke-route");
 
-// Importing all the pokemon for our data file
-const allPokemon = require("./data");
+const PORT = 8000;
 
 const app = express();
+
+app.use(express.json());
+app.use("/", pokeRoute);
 
 // -- Define your route listeners here! --
 
