@@ -42,4 +42,59 @@ router.get("/search", (req, resp) => {
   } else return resp.json(pokeName);
 });
 
+// A POST /pokemon route, that inserts the new Pokemon into the existing list of all Pokemons (don't worry about persisting the data to the disk, we're gonan learn that later)
+router.post('/pokemon', (req, resp) => {
+  const { name, types, height, weight, sprite } = req.body;
+
+  const newPoke = {
+    id: new Date().getTime(),
+    name: name,
+    "types": types,
+    "height": height,
+    "weight": weight,
+    "sprite": sprite
+  };
+
+  allPokemon.push(newPoke);
+
+  return resp.status(201).json(newPoke);
+});
+
+//A PUT /pokemon/:id route, that updates an existing Pokemon with the provided data
+router.put('/pokemon/:id', (req, resp) => {
+  const { id } = req.params;
+  const { name, types, height, weight, sprite } = req.body;
+
+  // Validation
+  if (!name || !types || !height || !weight || !sprite) {
+    return resp.status(400).json({ message: 'Please fill in all required data' });
+  }
+
+  const foundPoke = allPokemon.find((pokeObj) => pokeObj.id.toString() === id);
+  if (!foundPoke) {
+    return resp.status(400).json({ message: `User id # ${id} not found` });
+  }
+
+  foundPoke.name = name;
+  foundPoke.types = types;
+  foundPoke.height = height;
+  foundPoke.weight = weight;
+  foundPoke.sprite = sprite;  
+
+  resp.json(foundPoke);
+});
+
+//A DELETE /pokemon/:id route, that deletes an existing Pokemon and returns a success message
+router.delete('/pokemon/:id', (req, resp) => {
+  const { id } = req.params;
+
+  const foundIndex = allPokemon.findIndex((pokeObj) => pokeObj.id.toString() === id);
+  if (foundIndex < 0) {
+    return resp.status(400).json({ message: `User id # ${id} not found` });
+  }
+
+  allPokemon.splice(foundIndex, 1);
+  resp.json({ message: `Pokemon succesfully deleted.`});
+});
+
 module.exports = router;
