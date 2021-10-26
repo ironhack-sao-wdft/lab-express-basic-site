@@ -54,12 +54,12 @@ router.post ('/pokemons', (request, response) => {
     const lastId = allPokemon[allPokemon.length - 1].id;
     
     const newPokemon = {
-        id = lastId + 1,
-        name = name,
-        types = types,
-        height = height,
-        width = width,
-        sprite = sprite,
+        id: lastId + 1,
+        name: name,
+        types: types,
+        height: height,
+        width: width,
+        sprite: sprite,
     }
 
     //push no array
