@@ -1,16 +1,24 @@
 {
   "name": "lab-express-pokemon-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "![logo_ironhack_blue 7](https://user-images.githubusercontent.com/23629340/40541063-a07a0a8a-601a-11e8-91b5-2f13e4e6b441.png)",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./"
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarolNisaka/lab-express-pokemon-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CarolNisaka/lab-express-pokemon-api/issues"
+  },
+  "homepage": "https://github.com/CarolNisaka/lab-express-pokemon-api#readme"
 }
