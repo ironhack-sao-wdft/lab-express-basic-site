@@ -26,22 +26,28 @@ app.get("/:id", (req, res) => {
   }
   return res.json(pokemonById);
 });
-// function searchPokemon(text) {
-//   const clone = [...pokemon];
-//   const find = clone.filter((currentPokemon) => {
-//     let name = currentPokemon.name.toLowerCase().includes(text.toLowerCase());
-//     let type = currentPokemon.types.toLowerCase().includes(text.toLowerCase());
-//     return name || type;
-//   });
-// }
-// app.get("/search", (req, res) => {
-//   searchPokemon(req);
-//   console.log(searchPokemon(req));
-//   if (!searchPokemon()) {
-//     return res.status(404).json("Pokemon not found");
-//   }
-//   return res.json(searchPokemon());
-// });
+
+app.get(`/search`, (req, res) => {
+  const { name, type } = req.query;
+
+  if (name && type) {
+    return res.status(400).json("Can't search by name AND type");
+  }
+
+  if (type) {
+    const found = pokemon.filter((element) =>
+      element.types.includes(type.toLowerCase())
+    );
+  }
+  if (name) {
+    const found = pokemon.find(
+      (element) => element.name === name.toLowerCase()
+    );
+  }
+  if (!found) {
+    return res.status(404).json("Pokemon not found");
+  }
+});
 
 app.post("/", (req, res) => {
   const data = req.body;
